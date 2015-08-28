@@ -1,0 +1,21 @@
+{
+  "name": "CodeAgenda",
+  "version": "0.1.0",
+  "description": "Agenda Telefônica",
+  "authors": [
+    "Thiago Mori <thiago.mori@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "fontawesome#~4.4.0"
+  }
+}
