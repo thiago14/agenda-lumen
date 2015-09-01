@@ -45,11 +45,17 @@
             @endforeach
         </div>
     </div>
-    @if(isset($result))
-        <?php $bg = key($result); ?>
+    @if(\Session::has('flash_message_success'))
         <div class="row btn-row">
-            <div class="col-md-12 bg-{{ $bg }}">
-                <h3>{{ $result[$bg] }}</h3>
+            <div class="col-md-12 bg-success">
+                <h3>{{ Session::get('flash_message_success') }}</h3>
+            </div>
+        </div>
+    @endif
+    @if(\Session::has('flash_message_error'))
+        <div class="row btn-row">
+            <div class="col-md-12 bg-danger">
+                <h3>{{ Session::get('flash_message_error') }}</h3>
             </div>
         </div>
     @endif

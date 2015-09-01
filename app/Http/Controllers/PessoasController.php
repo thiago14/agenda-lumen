@@ -22,15 +22,13 @@ class PessoasController extends Controller
     {
         try{
             if(!empty($id)){
-                $pessoa = $this->pessoa->find($id);
-                $letra = substr($pessoa->apelido,0,1);
                 $this->pessoa->find($id)->delete();
-                $pessoas = $this->pessoa->where('apelido','like', $letra.'%')->orderBy('apelido')->get();
+                \Session::flash('flash_message_success','Contato excluido com sucesso.'); //mensagem de sucesso
             }
-            return view('agenda',['result'=> ['success' => 'Contato excluido com sucesso.'], 'pessoas' => $pessoas, 'letras'=> AgendaController::getLetra(), 'letraGet' => $letra]);
+            return redirect()->route('agenda.index'); //redireciona para outra página
         }catch (\Exception $e){
-            $pessoas = $this->pessoa->orderBy('apelido')->get();
-            return view('agenda',['result'=> ['danger' => 'Erro ao excluir o contato.'], 'pessoas' => $pessoas, 'letras'=> AgendaController::getLetra()]);
+            \Session::flash('flash_message_error', 'Erro ao excluir o contato.'); //mensagem de erro
+            return redirect()->route('agenda.index'); //redireciona para outra página
         }
 
     }
