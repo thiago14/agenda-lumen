@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">
+        <h3 class="panel-title"><i class="fa @if($pessoa->sexo == 'F') fa-female @else fa-male @endif"></i>
             {{ $pessoa->apelido }}
             <span class="pull-right">
                 <a href="#" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></a>

@@ -37,10 +37,10 @@ class TelefonesController extends Controller
                 $this->telefone->find($id)->delete();
                 \Session::flash('flash_message_success','Telefone excluido com sucesso.'); //mensagem de sucesso
             }
-            return redirect()->route('agenda.index'); //redireciona para outra página
+            return redirect()->back(); //redireciona para outra página
         }catch (\Exception $e){
             \Session::flash('flash_message_error', 'Erro ao excluir o telefone.'); //mensagem de erro
-            return redirect()->route('agenda.index'); //redireciona para outra página
+            return redirect()->back(); //redireciona para outra página
         }
 
     }
