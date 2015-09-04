@@ -2,34 +2,35 @@
 
 @section('content')
     <div class="col-md-6">
-        <form class="form-horizontal" action="{{ route('agenda.store.Pessoa') }}" method="post">
+        <form class="form-horizontal" action="{{ route('agenda.update.Pessoa', ['id' => $pessoa->id]) }}" method="post">
+            <input type="hidden" name="_method" value="PUT">
             <div class="form-group<?php echo $errors->first('nome', ' has-error'); ?>">
                 <label for="nome" class="col-sm-2 control-label">Nome</label>
 
                 <div class="col-sm-10">
-                    <input type="text" name="nome" value="{{ old('nome') }}" class="form-control" id="nome" placeholder="Nome Completo">
+                    <input type="text" name="nome" value="{{ $pessoa->nome }}" class="form-control" id="nome" placeholder="Nome Completo">
                 </div>
             </div>
             <div class="form-group<?php echo $errors->first('nome', ' has-error'); ?>">
                 <label for="apelido" class="col-sm-2 control-label">Apelido</label>
 
                 <div class="col-sm-10">
-                    <input type="text" name="apelido" value="{{ old('apelido') }}"class="form-control" id="apelido" placeholder="Apelido">
+                    <input type="text" name="apelido" value="{{ $pessoa->apelido }}"class="form-control" id="apelido" placeholder="Apelido">
                 </div>
             </div>
             <div class="form-group<?php echo $errors->first('nome', ' has-error'); ?>">
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="sexo" value="F" @if(old('sexo') == 'F') checked @endif > <i class="fa fa-female"></i><br>
-                            <input type="radio" name="sexo" value="M" @if(old('sexo') == 'M') checked @endif > <i class="fa fa-male"></i>
+                            <input type="radio" name="sexo" value="F" @if($pessoa->sexo == 'F') checked @endif > <i class="fa fa-female"></i><br>
+                            <input type="radio" name="sexo" value="M" @if($pessoa->sexo == 'M') checked @endif > <i class="fa fa-male"></i>
                         </label>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="submit" class="btn btn-primary">Alterar</button>
                 </div>
             </div>
         </form>
@@ -44,5 +45,6 @@
                 </ul>
             </div>
         @endif
+        @include('templates.telefones', ['telefones'=>$pessoa->telefones])
     </div>
 @endsection
