@@ -11,7 +11,7 @@ class AgendaController extends Controller
     {
         $pessoas = Pessoa::where('apelido','like', $letra.'%')->orderBy('apelido')->get();
 
-        return view('agenda', ['pessoas'=>$pessoas, 'letras'=> self::getLetra(), 'letraGet' => $letra]);
+        return view('agenda', ['pessoas'=>$pessoas, 'letraGet' => $letra]);
     }
 
     public function busca(Request $request)
@@ -21,17 +21,8 @@ class AgendaController extends Controller
             $query = Pessoa::where('apelido','like', '%'.$busca.'%');
             $pessoas = $query->where('nome','like', '%'.$busca.'%', 'or')->orderBy('apelido')->get();
 
-            return view('agenda', ['pessoas'=>$pessoas, 'letras'=> self::getLetra()]);
+            return view('agenda', ['pessoas'=>$pessoas]);
         }
 
-    }
-
-    public static function getLetra()
-    {
-        foreach(Pessoa::orderBy("apelido")->get() as $pessoa){
-            $letra[] = substr($pessoa->apelido,0,1);
-        }
-
-        return array_unique($letra);
     }
 }

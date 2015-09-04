@@ -78,7 +78,7 @@ $app->singleton(
 |
 */
 
-// $app->register(CodeAgenda\Providers\AppServiceProvider::class);
+ $app->register(CodeAgenda\Providers\AppServiceProvider::class);
 // $app->register(CodeAgenda\Providers\EventServiceProvider::class);
 
 /*
