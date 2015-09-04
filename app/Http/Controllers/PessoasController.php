@@ -80,9 +80,6 @@ class PessoasController extends Controller
             \Session::flash('flash_message_success','Contato atualizado com sucesso.'); //mensagem de sucesso
             return redirect()->route('agenda.letra', ['letra'=>$letra]);
         }catch (\Exception $e){
-            $pessoa = $this->pessoa->find($id);
-            $letra = strtoupper(substr($pessoa->apelido,0,1));
-
             \Session::flash('flash_message_error', 'Erro ao atualizar o contato.'); //mensagem de erro
             return redirect()->route('agenda.letra', ['letra'=>$letra]);
         }

@@ -22,6 +22,14 @@ $app->get('/contato/{id}/delete', ['as'=>'agenda.delete.Pessoa', 'uses' => 'Pess
 $app->delete('/contato/{id}/{letra}', ['as'=>'agenda.destroy.Pessoa', 'uses' => 'PessoasController@destroy']);
 
 //--- Telefone ---//
+// Create
+$app->get('/{contatoId}/telefone/novo', ['as'=>'agenda.novo.Telefone', 'uses' => 'TelefonesController@create']);
+$app->post('/{contatoId}/telefone', ['as'=>'agenda.store.Telefone', 'uses' => 'TelefonesController@store']);
+
+// Update
+$app->get('/telefone/{id}/editar', ['as'=>'agenda.edit.Telefone', 'uses' => 'TelefonesController@edit']);
+$app->put('/telefone/{id}', ['as'=>'agenda.update.Telefone', 'uses' => 'TelefonesController@update']);
+
 // Delete
 $app->get('/telefone/{id}/delete', ['as'=>'agenda.delete.Telefone', 'uses' => 'TelefonesController@delete']);
 $app->delete('/telefone/{id}/{letra}', ['as'=>'agenda.destroy.Telefone', 'uses' => 'TelefonesController@destroy']);

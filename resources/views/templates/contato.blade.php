@@ -10,6 +10,6 @@
     </div>
     <div class="panel-body">
         <h3>{{ $pessoa->nome }}</h3>
-        @include('templates.telefones', ['telefones' => $pessoa->telefones])
+        @include('templates.telefones', ['telefones' => $pessoa->telefones, 'contatoId' => $pessoa->id])
     </div>
 </div>

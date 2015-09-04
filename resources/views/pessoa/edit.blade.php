@@ -11,14 +11,14 @@
                     <input type="text" name="nome" value="{{ $pessoa->nome }}" class="form-control" id="nome" placeholder="Nome Completo">
                 </div>
             </div>
-            <div class="form-group<?php echo $errors->first('nome', ' has-error'); ?>">
+            <div class="form-group<?php echo $errors->first('apelido', ' has-error'); ?>">
                 <label for="apelido" class="col-sm-2 control-label">Apelido</label>
 
                 <div class="col-sm-10">
                     <input type="text" name="apelido" value="{{ $pessoa->apelido }}"class="form-control" id="apelido" placeholder="Apelido">
                 </div>
             </div>
-            <div class="form-group<?php echo $errors->first('nome', ' has-error'); ?>">
+            <div class="form-group<?php echo $errors->first('sexo', ' has-error'); ?>">
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="radio">
                         <label>
@@ -45,6 +45,6 @@
                 </ul>
             </div>
         @endif
-        @include('templates.telefones', ['telefones'=>$pessoa->telefones])
+        @include('templates.telefones', ['telefones'=>$pessoa->telefones, 'contatoId' => $pessoa->id])
     </div>
 @endsection
