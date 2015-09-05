@@ -19,4 +19,9 @@ class Pessoa extends Model
     {
         return $this->hasMany(Telefone::class);
     }
+
+    public function emails()
+    {
+        return $this->hasMany(Email::class);
+    }
 }

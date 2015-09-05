@@ -23,17 +23,15 @@ class EmailsController extends Controller
     public function create($contatoId)
     {
         $pessoa = Pessoa::find($contatoId);
-        return view('telefone.create', compact('pessoa'));
+        return view('email.create', compact('pessoa'));
     }
 
     public function store(Request $request, $contatoId)
     {
         $validator = Validator::make($request->all(), [
             'descricao' => 'required|min:3|max:50',
-            'codPais' => 'required|max:4|between:1,197',
-            'ddd' => 'required|numeric|between:0,99',
-            'prefixo' => 'required|numeric|max:9999',
-            'sufixo' => 'required|numeric|max:9999',
+            'email' => 'required|email|unique:emails',
+            'pessoa_id' => 'required|numeric',
         ]);
         $pessoa = Pessoa::find($contatoId);
         $letra = strtoupper(substr($pessoa->apelido,0,1));
@@ -46,10 +44,10 @@ class EmailsController extends Controller
         try{
             $this->email->create($request->all());
 
-            \Session::flash('flash_message_success','Email salvo com sucesso.'); //mensagem de sucesso
+            \Session::flash('flash_message_success','E-mail salvo com sucesso.'); //mensagem de sucesso
             return redirect()->route('agenda.letra', ['letra'=>$letra]);
         }catch (\Exception $e){
-            \Session::flash('flash_message_error', 'Erro ao salvar o telefone.'); //mensagem de erro
+            \Session::flash('flash_message_error', 'Erro ao salvar o e-mail.'); //mensagem de erro
             return redirect()->route('agenda.letra', ['letra'=>$letra]);
         }
 
@@ -57,19 +55,19 @@ class EmailsController extends Controller
 
     public function edit($id)
     {
-        $telefone = $this->email->find($id);
-        $pessoa = $telefone->pessoa;
-        return view('telefone.edit', compact('telefone', 'pessoa'));
+        $email = $this->email->find($id);
+        $pessoa = $email->pessoa;
+        return view('email.edit', compact('email', 'pessoa'));
     }
 
     public function update(Request $request, $id)
     {
         try{
-            $telefone = $this->email->find($id);
+            $email = $this->email->find($id);
 
             $validator = Validator::make($request->all(), [
                 'descricao' => 'required|min:3|max:50',
-                'email' => 'required|email',
+                'email' => 'required|email|unique:emails,email,'.$email->id,
             ]);
 
             if($validator->fails()){
@@ -78,15 +76,15 @@ class EmailsController extends Controller
                     ->withInput();
             }
 
-            $telefone->fill($request->all())->save();
-            $pessoa = $telefone->pessoa;
+            $email->fill($request->all())->save();
+            $pessoa = $email->pessoa;
             $letra = strtoupper(substr($pessoa->apelido,0,1));
 
             \Session::flash('flash_message_success','Contato atualizado com sucesso.'); //mensagem de sucesso
             return redirect()->route('agenda.letra', ['letra'=>$letra]);
         }catch (\Exception $e){
-            $telefone = $this->email->find($id);
-            $pessoa = $telefone->pessoa;
+            $email = $this->email->find($id);
+            $pessoa = $email->pessoa;
             $letra = strtoupper(substr($pessoa->apelido,0,1));
             \Session::flash('flash_message_error', 'Erro ao atualizar o contato.'); //mensagem de erro
             return redirect()->route('agenda.letra', ['letra'=>$letra]);
@@ -96,10 +94,10 @@ class EmailsController extends Controller
 
     public function delete($id)
     {
-        $telefone = $this->email->find($id);
-        $pessoa = $telefone->pessoa;
+        $email = $this->email->find($id);
+        $pessoa = $email->pessoa;
         $letraGet = substr($pessoa->apelido,0,1);
-        return view('telefone.delete', compact('pessoa', 'letraGet', 'telefone'));
+        return view('email.delete', compact('pessoa', 'letraGet', 'email'));
     }
 
     public function destroy($id,$letra)
@@ -111,7 +109,7 @@ class EmailsController extends Controller
             }
             return redirect()->route('agenda.letra', ['letra'=>$letra]); //redireciona para outra página
         }catch (\Exception $e){
-            \Session::flash('flash_message_error', 'Erro ao excluir o telefone.'); //mensagem de erro
+            \Session::flash('flash_message_error', 'Erro ao excluir o email.'); //mensagem de erro
             return redirect()->route('agenda.letra', ['letra'=>$letra]); //redireciona para outra página
         }
 
