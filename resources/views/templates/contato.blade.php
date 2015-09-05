@@ -10,7 +10,14 @@
     </div>
     <div class="panel-body">
         <h3>{{ $pessoa->nome }}</h3>
-        @include('templates.telefones', ['telefones' => $pessoa->telefones, 'contatoId' => $pessoa->id])
-        @include('templates.emails', ['emails' => $pessoa->emails, 'contatoId' => $pessoa->id])
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#telefone_{{ $pessoa->id }}" aria-controls="telefone" role="tab" data-toggle="tab">Telefones</a></li>
+            <li role="presentation"><a href="#email_{{ $pessoa->id }}" aria-controls="email" role="tab" data-toggle="tab">E-mails</a></li>
+        </ul>
+        <br>
+        <div class="tab-content">
+            @include('templates.telefones', ['telefones' => $pessoa->telefones, 'contatoId' => $pessoa->id])
+            @include('templates.emails', ['emails' => $pessoa->emails, 'contatoId' => $pessoa->id])
+        </div>
     </div>
 </div>
