@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 
          $this->call('PessoaTableSeeder');
          $this->call('TelefoneTableSeeder');
+         $this->call('EmailTableSeeder');
 
         Model::reguard();
     }
