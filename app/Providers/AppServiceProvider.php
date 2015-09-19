@@ -10,7 +10,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        view()->share(['letras' => $this->getLetra()]);
+        if(!\App::runningInConsole()){
+            view()->share(['letras' => $this->getLetra()]);
+        }
     }
 
     /**
